@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Maths Competition 2022/2023</title>
+    <script>
+      function start() {
+        document.getElementById("start-button").style.display = "none";
+        document.getElementById("timer").style.display = "inline-block";
+        document.getElementById("penalty-button").style.display = "inline-block";
+        document.getElementById("code-button").style.display = "inline-block";
+        document.getElementById("hint-button").style.display = "inline-block";
+		document.getElementById("ques-button").style.display = "inline-block";
+		document.getElementById("ans-button").style.display = "inline-block";
+		n = 0;
+		qn = 0;
+		lv1 = [101,102,103,104,105,106,107,108,109,110];
+		lv1ans = [1,2,3,4,5,6,7,8,9,10];
+		lv2 = [201,202,203,204,205,206,207,208,209,210];
+		lv2ans = [11,12,13,14,15,16,17,18,19,20];
+		lv3 = [301,302,303,304,305,306,307,308,309,310];
+		lv3ans = [21,22,23,24,25,26,27,28,29,30];
+		allq = lv1.concat(lv2.concat(lv3));
+		allans = lv1ans.concat(lv2ans.concat(lv3ans));
+		got = [];  
+        time = 15*60;
+        setInterval(function() {
+          time = time - 1;
+          var minutes = Math.floor(time / 60);
+          var seconds = time % 60;
+          document.getElementById("timer").innerHTML = "Time: " + minutes + "m " + seconds + "s";
+        }, 1000);
+      }
+        function addPenalty() {
+          time = time - 120;
+        }
+      function checkCode() {
+        var code = prompt("Please enter the 4-digit code:");
+        if (code === "2138") {
+          alert("Get card 25");
+        } else if (code === "9999"){
+			alert("mobile activated");
+			n = 1;
+		} else if (code === "1080"){
+			alert("get card 404");
+		} else if (code === "9980"){
+			alert("get card 405");
+		} else if (code === "1357"){
+			alert(allq);
+			alert(allans);
+		} else {
+          time = time - 120;
+          alert("Penalty!");
+        }
+      }
+	  function getQuestion() {	 
+		 if (qn < 3){
+			 var level = prompt("Which level (1, 2 or 3) do you want?")
+			 if (level === "1"){
+			 	randomElement = lv1[Math.floor(Math.random() * lv1.length)];
+				alert("visit the website: www.srleng.com/"+randomElement);
+				qn++;
+				got.push(randomElement);
+		 	} else if (level === "2"){
+			 	randomElement = lv2[Math.floor(Math.random() * lv2.length)];
+			 	alert("visit the website: www.srleng.com/"+randomElement);
+				qn++;
+				got.push(randomElement);
+		 	} else if (level === "3"){
+			 	randomElement = lv3[Math.floor(Math.random() * lv3.length)];
+			 	alert("visit the website: www.srleng.com/"+randomElement);
+				qn++;
+				got.push(randomElement);
+		 	} else {
+			 	alert("pleas check your input");
+		 	} 
+		 } else {
+			 alert("you have already got three questions, solve them first!")
+	  		}
+	  }
+	  function ansQuestion(){
+		  if (got.length === 0){
+		 var ans = prompt("Which question do you want to answer?");
+		  } else {
+			  var ans = prompt("Which question do you want to answer?\n You have question number " + got);
+		  }
+		 gotindex = got.indexOf(+ans);
+			if (+ans < 400 && got.indexOf(+ans) === -1){
+				alert("You do not have this question");
+			} else if (+ans <400) {
+		  		index = allq.indexOf(+ans)				
+				var ansnum = prompt("Please tell me your answer");
+				if (+ansnum === allans[index]){
+					alert("correct");
+					if (+ans < 200){
+						time = time + 60;
+						lv1index = lv1.indexOf(+ans);
+						lv1.splice(lv1index,1);
+						lv1ans.splice(lv1index,1);
+						allq.splice(index,1);
+						allans.splice(index,1);
+					} else if (+ans < 300){
+						time = time + 120;
+						lv2index = lv2.indexOf(+ans);
+						lv2.splice(lv2index,1);
+						lv2ans.splice(lv2index,1);
+						allq.splice(index,1);
+						allans.splice(index,1);					
+					} else if (+ans < 400){
+						time = time + 300;
+						lv3index = lv3.indexOf(+ans);
+						lv3.splice(lv3index,1);
+						lv3ans.splice(lv3index,1);
+						allq.splice(index,1);
+						allans.splice(index,1);					
+					}
+					got.splice(gotindex,1);	
+				} else {
+					alert("try again");
+				}
+			}
+	  }
+      function getHint() {
+        if (n > 0) {
+          var key = prompt("What do you want to ask?");
+			if (key === "test"){
+				alert("test success");
+			} else if (key.includes("question")){
+				alert(got);
+				}
+			}
+        if (n === 0) {
+          alert("activate the mobile first");
+        }
+      }
+    </script>
+    <style>
+      body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-family: "Tw Cen MT Condensed";
+	color: #0F5070;
+		}
+      #timer,
+      #penalty-button,
+      #code-button,
+      #hint-button,
+	  #ques-button,
+	  #ans-button{
+        display: none;
+        font-size: 24px;
+        padding: 10px 20px;
+      }
+      #start-button {
+        font-size: 24px;
+        padding: 10px 20px;
+      }
+      button {
+        margin-right: 10px;
+      }
+      #button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      #button-container1 {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Maths Competition 2022/2023</h1>
+    <button id="start-button" onclick="start()">Press to Start</button>
+    <div id="timer"> Time: 15m 0s</div>
+    <br>
+    <div id="button-container">
+      <button id="penalty-button" onclick="addPenalty()">Penalty (-2min)</button>
+      <button id="code-button" onclick="checkCode()">Code</button>
+      <button id="hint-button" onclick="getHint()">Ask AI</button>
+	</div>
+	<div id="button-container1">
+	  <button id="ques-button" onclick="getQuestion()">Get questions</button>
+	  <button id="ans-button" onclick="ansQuestion()">Answer questions</button>
+    </div>
+  </body>
+</html>
