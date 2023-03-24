@@ -57,17 +57,23 @@
 			 var level = prompt("Which level (1, 2 or 3) do you want?")
 			 if (level === "1"){
 			 	randomElement = lv1[Math.floor(Math.random() * lv1.length)];
-				alert("visit the website: www.srleng.com/"+randomElement);
+				var url = "http://www.srleng.com/" + randomElement;
+				var win = window.open(url, '_blank');
+				win.focus();
 				qn++;
 				got.push(randomElement);
 		 	} else if (level === "2"){
 			 	randomElement = lv2[Math.floor(Math.random() * lv2.length)];
-			 	alert("visit the website: www.srleng.com/"+randomElement);
+				var url = "http://www.srleng.com/" + randomElement;
+				var win = window.open(url, '_blank');
+				win.focus();
 				qn++;
 				got.push(randomElement);
 		 	} else if (level === "3"){
 			 	randomElement = lv3[Math.floor(Math.random() * lv3.length)];
-			 	alert("visit the website: www.srleng.com/"+randomElement);
+				var url = "http://www.srleng.com/" + randomElement;
+				var win = window.open(url, '_blank');
+				win.focus();
 				qn++;
 				got.push(randomElement);
 		 	} else {
